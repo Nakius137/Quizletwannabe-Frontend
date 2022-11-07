@@ -1,0 +1,183 @@
+
+
+.center-wszystko{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column; 
+    min-width: 800px;
+}
+.center-wrap{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.root{
+    width: 100%;
+}
+.div{
+    margin: 0px 400px 0px 400px;
+}
+.navbar{
+    width: 100%;
+}
+.break{
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.btn-container{
+    display: inline-flex;
+}
+.btn{
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn>svg{
+    margin-right: 10px;
+}
+
+.slowka{
+    border: 2px solid black;
+    width: 800px;
+    display: flex;
+    margin: 15px; 
+}
+.slowko{
+    font-weight: 500;
+    width: 50%;
+    height: 50px;
+}
+
+.tytul-glowny{
+    font-size: 30px;
+    margin: 30px;
+    color: white;
+}
+.tytul-glowny-white{
+    font-size: 30px;
+    margin: 30px;
+    color: black;
+}
+
+#check{
+    width: 50px;
+    height: 25px;
+}
+
+
+.white-check{
+    background-color: white;
+}
+.black-check{
+    background-color: black;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .div{
+        margin: 0px;
+        width: 400px;
+    }
+    .slowko{
+        width: 200px;
+    }
+    .slowka{
+        width:400px;
+    }
+    .center-wszystko{
+        max-width: 400px;
+    }
+    *{
+        max-width: 400px;
+    }
+}
+
+.fiszka{
+    width: 100px;
+    height: 100px;
+    background-color: aliceblue;
+}
+
+#polski-fiszka{
+    visibility: hidden;
+}
+#obcy-fiszka{
+    visibility: hidden;
+}
+
+#polski-fiszka-widac{
+    visibility: visible;
+}
+#obcy-fiszka-widac{
+    visibility: visible;
+}
+
+.carousel{
+    width: 1000px;
+    height: 800px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+.carousel-caption{
+    height: 50%;
+}
+.tlo-fiszka{
+    width: 100%;
+    height: 800px;
+    background-color: #d65e5a;
+    border-radius: 30px;
+}
+
+.tlo-fiszka-dark{
+    width: 100%;
+    height: 800px;
+    background-color: #2B2B2B;
+    border-radius: 30px;
+}
+.d-block{
+    border-radius: 20px;
+}
+.slowko-fiszka{
+    font-size: 60px;
+}
+
+.center-fiszke{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 80px;
+}
+
+.draker{
+    background-color: #000000;
+}
+
+
+
+.link{
+    text-decoration-line: none;
+    flex: 1 1 auto;
+}
+
+.link>button{
+    width: 90%;
+}
+
+.single-quiz{
+    height: 200px;
+    width: 300px;
+    background-color: #2B2B2B;
+    margin: 20px;
+    border-radius: 15px;
+}
+
+.all-quiz{
+    display: flex;
+    flex-wrap: wrap;
+}
+.white-text{
+    color: white;
+}
