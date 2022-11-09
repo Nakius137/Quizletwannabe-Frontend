@@ -44,7 +44,3 @@ function Fiszki() {
 
 export default Fiszki;
 
-/* <div className="fiszka" onClick={zmien}>
-        <h1 id="polski-fiszka-widac">Cos</h1>
-        <h1 id="obcy-fiszka">dfFDSA</h1>
-</div> */

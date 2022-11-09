@@ -5,7 +5,7 @@ function Slowka() {
   return (
     <>
       <div className="center-wrap">
-        {slowka.map((slowko, index) => {
+        {slowka[0].words.map((slowko, index) => {
           return (
             <ListGroup key={index} horizontal id="slowka" className="slowka">
               <ListGroup.Item id="slowko " className="slowko">

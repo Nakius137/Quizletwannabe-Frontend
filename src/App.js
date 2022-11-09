@@ -6,6 +6,8 @@ import { Link, Route, Switch } from "react-router-dom";
 import Quiz from './pages/Quiz'
 import Main from './pages/Main'
 import Login from "./pages/Login"
+import User from "./pages/User"
+import Pisz from "./pages/Pisz"
 
 function App() {
   let isdark = localStorage.getItem("isdark");
@@ -28,6 +30,12 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/user">
+          <User />
+        </Route>
+        <Route path="/pisz">
+          <Pisz />
         </Route>
       </Switch>
       <Toogle />
