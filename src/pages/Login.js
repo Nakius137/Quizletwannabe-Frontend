@@ -6,9 +6,11 @@ import { useContext, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../components/Navbar";
 import axios from "axios";
+import UserContext from "../context/user-context";
 
 function Loign() {
   const { dark } = useContext(DarkContext);
+  const {login,setLogin} = useContext(UserContext);
 
   const [token, setToken] = useState("");
 
@@ -25,6 +27,14 @@ function Loign() {
     const Acesstoken = await axios
       .post("http://www.localhost:5000/login", data)
       .then((response) => setToken(response[`data`][`accessToken`]));
+    
+    if(token){
+      setLogin(true)
+    }else{
+      alert('logowanie nie powiodło sie')
+    }
+
+    
   };
 
   const SendDataRegister = () => {
