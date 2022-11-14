@@ -22,16 +22,15 @@ function Fiszki() {
   const succes = useRef();
   const fail = useRef();
   const center = useRef();
-  
 
   const onPrevClick = () => {
     hideAlert();
-    center.current.className="center-fiszke"
+    center.current.className = "center-fiszke";
     ref.current.prev();
   };
   const onNextClick = () => {
     hideAlert();
-    center.current.className="center-fiszke"
+    center.current.className = "center-fiszke";
     ref.current.next();
   };
   function handleClick(refs, index) {
@@ -40,14 +39,14 @@ function Fiszki() {
     console.log(slowka[0].words[index].Obcy);
     if (value === slowka[0].words[index].Obcy) {
       console.log("dobrze");
-      center.current.className="center-fiszke-alert"
+      center.current.className = "center-fiszke-alert";
       succes.current.className =
         "fade succes-alert-fiszka alert alert-success show";
       fail.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
     } else {
       console.log("źle");
-      center.current.className="center-fiszke-alert"
+      center.current.className = "center-fiszke-alert";
       fail.current.className =
         "fade danger-alert-fiszka alert alert-danger show";
       succes.current.className =
@@ -96,13 +95,36 @@ function Fiszki() {
                     />
                   </InputGroup>
                   <ButtonGroup aria-label="Basic example">
-                    <Button onClick={onPrevClick}>
+                    <Button
+                      className={
+                        dark
+                          ? "btn btn-dark btn-lg break"
+                          : "btn btn-primary btn-lg break"
+                      }
+                      onClick={onPrevClick}
+                    >
                       Przejdź do poprzedniego
                     </Button>
-                    <Button onClick={() => handleClick(refs, index)}>
+                    <Button
+                      className={
+                        dark
+                          ? "btn btn-dark btn-lg break"
+                          : "btn btn-primary btn-lg break"
+                      }
+                      onClick={() => handleClick(refs, index)}
+                    >
                       Sprawdź
                     </Button>
-                    <Button onClick={onNextClick}>Przejdź do następnego</Button>
+                    <Button
+                      className={
+                        dark
+                          ? "btn btn-dark btn-lg break"
+                          : "btn btn-primary btn-lg break"
+                      }
+                      onClick={onNextClick}
+                    >
+                      Przejdź do następnego
+                    </Button>
                   </ButtonGroup>
                 </Carousel.Caption>
               </Carousel.Item>

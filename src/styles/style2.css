@@ -191,6 +191,7 @@
     flex-wrap: wrap;
     margin-left: 25%;
     justify-content: center;
+    flex-direction: column
 }
 .margin-top-h2{
     margin-top: 7%;
