@@ -8,7 +8,7 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import User from "./pages/User";
 import Pisz from "./pages/Pisz";
-import UserContext from "./context/user-context";
+import { UserContext } from "./context/user-context";
 
 function App() {
   let isdark = localStorage.getItem("isdark");
@@ -16,12 +16,12 @@ function App() {
 
   const [dark, setDark] = useState(isdark);
   const value = { dark, setDark };
-  const { login } = useContext(UserContext);
+  const { logged } = useContext(UserContext);
 
   return (
     <DarkContext.Provider value={value}>
       <Switch>
-        {login ? (
+        {logged ? (
           <Route exact path="/">
             <Main />
           </Route>

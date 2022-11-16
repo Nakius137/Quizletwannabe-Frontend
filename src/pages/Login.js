@@ -2,17 +2,15 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import React from "react";
 import DarkContext from "../context/dark-context";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../components/Navbar";
 import axios from "axios";
-import UserContext from "../context/user-context";
+import { UserContext } from "../context/user-context";
 
 function Loign() {
   const { dark } = useContext(DarkContext);
-  const {login,setLogin} = useContext(UserContext);
-
-  const [token, setToken] = useState("");
+  const { setToken, setLogged, setEmail, email } = useContext(UserContext);
 
   const login_email = useRef();
   const login_password = useRef();
@@ -24,17 +22,11 @@ function Loign() {
       email: login_email.current.value,
       password: login_password.current.value,
     };
-    const Acesstoken = await axios
+    const acesstoken = await axios
       .post("http://www.localhost:5000/login", data)
-      .then((response) => setToken(response[`data`][`accessToken`]));
-    
-    if(token){
-      setLogin(true)
-    }else{
-      alert('logowanie nie powiodło sie')
-    }
-
-    
+      .then((response) => setToken(response[`data`][`accessToken`]))
+      .then((email) => setEmail(data.email))
+      .then((logged) => setLogged(true));
   };
 
   const SendDataRegister = () => {

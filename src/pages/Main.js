@@ -4,15 +4,28 @@ import { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../components/Navbar";
 import slowka from "../slowka";
-import UserContext from "../context/user-context";
 import axios from "axios";
+import { UserContext } from "../context/user-context";
 
 function Main() {
-  const { login } = useContext(UserContext);
+  const { logged, token, email } = useContext(UserContext);
   const slowka_titles = [];
 
   useEffect(() => {
-    axios.get("http://localhost:5000/").then((data) => console.log(data));
+    async function getData() {
+      console.log(email);
+      console.log(token);
+      axios
+        .get(`http://localhost:5000/main/?email=${email}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => console.log(response));
+    }
+    getData();
   }, []);
 
   //dodajemy do tablicy same tytuły Quizów //tak pisze po polsku. Bad boyyyyyyyyyyyy - cringe
@@ -24,7 +37,7 @@ function Main() {
     <>
       <Nav></Nav>
       <h1>Twoje Quizy:</h1>
-      {login ? (
+      {logged ? (
         <div className="all-quiz">
           {slowka_titles.map((title, index) => {
             return (

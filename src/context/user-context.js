@@ -1,8 +1,25 @@
-import React from "react";
+/* eslint-disable import/no-anonymous-default-export */
+import React, { useState } from "react";
 
-const UserContext = React.createContext({
-  login: false,
-  setLogin: () => {},
-});
+export const UserContext = React.createContext(null);
 
-export default UserContext;
+const UserProvider = ({ children }) => {
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
+  const [logged, setLogged] = useState(false);
+
+  const userInfo = {
+    email: email,
+    setEmail: setEmail,
+    token: token,
+    setToken: setToken,
+    logged: logged,
+    setLogged: setLogged,
+  };
+
+  return (
+    <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>
+  );
+};
+
+export default UserProvider;
