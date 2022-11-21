@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { useContext } from "react";
 import DarkContext from "../context/dark-context";
 import { Link } from "react-router-dom";
+  
 
 function Main() {
   const { dark } = useContext(DarkContext);

@@ -34,7 +34,7 @@ function Loign() {
       email: register_email.current.value,
       password: register_password.current.value,
     };
-    console.log(data);
+    //console.log(data);
 
     axios
       .post("http://www.localhost:5000/register", data)

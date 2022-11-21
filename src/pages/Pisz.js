@@ -6,9 +6,12 @@ import { useContext, useRef } from "react";
 import DarkContext from "../context/dark-context";
 import { Alert, Button, ButtonGroup, Form, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
+import QuizContext from "../context/quiz-context";
 
 function Fiszki() {
   const { dark } = useContext(DarkContext);
+
+  const { quiz, setQuiz } = useContext(QuizContext);
 
   function hideAlert() {
     succes.current.className =
@@ -33,11 +36,13 @@ function Fiszki() {
     center.current.className = "center-fiszke";
     ref.current.next();
   };
+
   function handleClick(refs, index) {
     const value = refs.current[index].value;
-    console.log(index);
-    console.log(slowka[0].words[index].Obcy);
-    if (value === slowka[0].words[index].Obcy) {
+
+    //console.log(quiz.words[index].TranslatedContent);
+
+    if (value === quiz.words[index].TranslatedContent) {
       console.log("dobrze");
       center.current.className = "center-fiszke-alert";
       succes.current.className =
@@ -74,16 +79,16 @@ function Fiszki() {
           Niestety zła odpowiedź
         </Alert>
         <Carousel interval={null} className="pisanie" ref={ref}>
-          {slowka[0].words.map((slowko, index) => {
-            //console.log(index);
+          {quiz.words.map((slowko, index) => {
+            console.log(slowko);
             return (
               <Carousel.Item key={index}>
                 <div
                   className={dark ? "tlo-pisanie-dark" : "tlo-pisanie"}
                 ></div>
                 <Carousel.Caption className="caption-pisanie">
-                  <h1 id={slowko.id} className="slowko-fiszka">
-                    {slowko.Polski}
+                  <h1 id={index} className="slowko-fiszka">
+                    {slowko.OriginalContent}
                   </h1>
                   <InputGroup className="mb-3">
                     <Form.Control

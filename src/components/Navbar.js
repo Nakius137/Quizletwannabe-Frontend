@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Nav() {
   const { dark } = useContext(DarkContext);
-  const { logged } = useContext(UserContext);
+  const { logged, email} = useContext(UserContext);
 
   return (
     <>
@@ -29,7 +29,7 @@ function Nav() {
             {logged ? (
               <Link className="link" to="/user">
                 <Navbar.Text className="white-text">
-                  Zalogowano jako: Jakub
+                  Zalogowano jako: {email}
                 </Navbar.Text>
               </Link>
             ) : (

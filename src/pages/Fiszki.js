@@ -4,33 +4,38 @@ import Carousel from "react-bootstrap/Carousel";
 import "react-bootstrap";
 import { useContext } from "react";
 import DarkContext from "../context/dark-context";
+import QuizContext from "../context/quiz-context";
 
-function handleWordChange(slowko) {
-  if (document.getElementById(slowko.id).innerHTML === slowko.Polski) {
-    document.getElementById(slowko.id).innerHTML = slowko.Obcy;
+function handleWordChange(slowko,index) {
+  console.log(slowko);
+  if (document.getElementById(index).innerHTML === slowko.OriginalContent) {
+    document.getElementById(index).innerHTML = slowko.TranslatedContent;
   } else {
-    document.getElementById(slowko.id).innerHTML = slowko.Polski;
+    document.getElementById(index).innerHTML = slowko.OriginalContent;
   }
 }
 
 function Fiszki() {
   const { dark } = useContext(DarkContext);
 
+  const { quiz, setQuiz } = useContext(QuizContext);
+  //console.log(quiz.words);
+
   return (
     <>
       <Nav></Nav>
       <div className="center-fiszke">
         <Carousel interval={null}>
-          {slowka.map((slowko) => {
+          {quiz.words.map((slowko,index) => {
             return (
               <Carousel.Item
-                key={slowko.id}
-                onClick={() => handleWordChange(slowko)}
+                key={slowko.OriginalContent}
+                onClick={() => handleWordChange(slowko,index)}
               >
                 <div className={dark ? "tlo-fiszka-dark" : "tlo-fiszka"}></div>
                 <Carousel.Caption>
-                  <h1 id={slowko.id} className="slowko-fiszka">
-                    {slowko.Polski}
+                  <h1 id={index} className="slowko-fiszka">
+                    {slowko.TranslatedContent}
                   </h1>
                 </Carousel.Caption>
               </Carousel.Item>

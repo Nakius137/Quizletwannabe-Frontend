@@ -1,18 +1,23 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import slowka from "../slowka";
 
+import QuizContext from "../context/quiz-context";
+import { useContext } from "react";
+
 function Slowka() {
+  const { quiz, setQuiz } = useContext(QuizContext);
+  console.log(quiz);
   return (
     <>
       <div className="center-wrap">
-        {slowka[0].words.map((slowko, index) => {
+        {quiz.words.map((slowko, index) => {
           return (
             <ListGroup key={index} horizontal id="slowka" className="slowka">
               <ListGroup.Item id="slowko " className="slowko">
-                {slowko.Polski}
+                {slowko.OriginalContent}
               </ListGroup.Item>
               <ListGroup.Item id="slowko " className="slowko">
-                {slowko.Obcy}
+                {slowko.TranslatedContent}
               </ListGroup.Item>
             </ListGroup>
           );

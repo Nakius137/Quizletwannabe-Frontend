@@ -10,45 +10,70 @@ import User from "./pages/User";
 import Pisz from "./pages/Pisz";
 import { UserContext } from "./context/user-context";
 
+import QuizContext from "./context/quiz-context";
+
 function App() {
   let isdark = localStorage.getItem("isdark");
   isdark = JSON.parse(localStorage.getItem("isdark"));
 
   const [dark, setDark] = useState(isdark);
-  const value = { dark, setDark };
+
   const { logged } = useContext(UserContext);
 
+  const [quiz, setQuiz] = useState();
+
   return (
-    <DarkContext.Provider value={value}>
-      <Switch>
-        {logged ? (
-          <Route exact path="/">
-            <Main />
-          </Route>
-        ) : (
-          <Route exact path="/">
+    <QuizContext.Provider value={{ quiz, setQuiz }}>
+      <DarkContext.Provider value={{ dark, setDark }}>
+        <Switch>
+          {logged ? (
+            <Route exact path="/">
+              <Main />
+            </Route>
+          ) : (
+            <Route exact path="/">
+              <Login />
+            </Route>
+          )}
+          {logged ? (
+            <Route path="/fiszka">
+              <Fiszki />
+            </Route>
+          ) : (
+            <Route path="/fiszka">
+              <Login />
+            </Route>
+          )}
+          {logged ? (
+            <Route path="/quiz">
+              <Quiz />
+            </Route>
+          ) : (
+            <Route path="/quiz">
+              <Login />
+            </Route>
+          )}
+          {logged ? (
+            <Route path="/pisz">
+              <Pisz />
+            </Route>
+          ) : (
+            <Route path="/pisz">
+              <Login />
+            </Route>
+          )}
+
+          <Route path="/login">
             <Login />
           </Route>
-        )}
 
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/fiszka">
-          <Fiszki />
-        </Route>
-        <Route path="/quiz">
-          <Quiz />
-        </Route>
-        <Route path="/user">
-          <User />
-        </Route>
-        <Route path="/pisz">
-          <Pisz />
-        </Route>
-      </Switch>
-      <Toogle />
-    </DarkContext.Provider>
+          <Route path="/user">
+            <User />
+          </Route>
+        </Switch>
+        <Toogle />
+      </DarkContext.Provider>
+    </QuizContext.Provider>
   );
 }
 
