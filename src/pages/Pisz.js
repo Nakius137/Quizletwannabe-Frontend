@@ -110,6 +110,7 @@ function Fiszki() {
                     >
                       Przejdź do poprzedniego
                     </Button>
+
                     <Button
                       className={
                         dark

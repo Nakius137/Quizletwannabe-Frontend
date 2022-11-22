@@ -10,24 +10,21 @@ import QuizContext from "../context/quiz-context";
 import DarkContext from "../context/dark-context";
 
 function Main() {
-  const { logged, token, email } = useContext(UserContext);
-  const slowka_titles = [];
-  const [response, setResponse] = useState("");
-
+  const { logged, token, email, setResponse, response } =
+    useContext(UserContext);
   const { dark } = useContext(DarkContext);
+  const { setQuiz } = useContext(QuizContext);
 
-  const { quiz, setQuiz } = useContext(QuizContext);
-
-  const handleQuizChange = (slowa) => {
-    setQuiz(slowa);
-    console.log("zmienione");
-    //console.log(quiz);
+  const handleQuizChange = (response, collectionName) => {
+    for (let collection of response.collection) {
+      if (collection.name === collectionName) {
+        setQuiz(collection);
+      }
+    }
   };
 
   useEffect(() => {
     async function getData() {
-      //console.log(email);
-      //console.log(token);
       axios
         .get(`http://localhost:5000/main/?email=${email}`, {
           headers: {
@@ -40,33 +37,38 @@ function Main() {
     }
     getData();
   }, []);
+
   if (response) {
     return (
       <>
         <Nav></Nav>
-        <h1 className={dark? "white-h1":"black-h1"}>Twoje Quizy:</h1>
+        <h1 className={dark ? "white-h1" : "black-h1"}>Twoje Quizy:</h1>
         {logged ? (
           <div className="all-quiz">
-            {response.collectionName.map((title, index) => {
-              console.log(response.words.length);
+            {Object.entries(response.collection).map((index) => {
+              console.log(index);
               return (
-                <div className={dark? "single-quiz-dark":"single-quiz"} key={index}>
-                  <h1 className={dark? "tytul-quiz-dark":"tytul-quiz"}>
-                    {response.collectionName[index].name}
+                <div
+                  className={dark ? "single-quiz-dark" : "single-quiz"}
+                  key={index}
+                >
+                  <h1 className={dark ? "tytul-quiz-dark" : "tytul-quiz"}>
+                    {index[1].name}
                   </h1>
                   <div className="ilosc-slowek">
                     {" "}
-                    <p className={dark? "p-dark":"p"}>
+                    <p className={dark ? "p-dark" : "p"}>
                       {" "}
-                      {response.words.length} słówek{" "}
+                      {index[1].words.length} słówek{" "}
                     </p>
                   </div>
 
                   <Link className="link" to="/quiz">
                     <Button
-                      
-                      className={dark? "button-center btn btn-dark":"button-center"}
-                      onClick={() => handleQuizChange(response)}
+                      className={
+                        dark ? "button-center btn btn-dark" : "button-center"
+                      }
+                      onClick={() => handleQuizChange(response, index[1].name)}
                     >
                       Przejdź do quizu
                     </Button>

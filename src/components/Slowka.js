@@ -1,30 +1,46 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import slowka from "../slowka";
-
 import QuizContext from "../context/quiz-context";
 import { useContext } from "react";
+import { UserContext } from "../context/user-context";
 
 function Slowka() {
-  const { quiz, setQuiz } = useContext(QuizContext);
-  console.log(quiz);
-  return (
-    <>
-      <div className="center-wrap">
-        {quiz.words.map((slowko, index) => {
-          return (
-            <ListGroup key={index} horizontal id="slowka" className="slowka">
-              <ListGroup.Item id="slowko " className="slowko">
-                {slowko.OriginalContent}
-              </ListGroup.Item>
-              <ListGroup.Item id="slowko " className="slowko">
-                {slowko.TranslatedContent}
-              </ListGroup.Item>
-            </ListGroup>
-          );
-        })}
-      </div>
-    </>
-  );
+  const { quiz } = useContext(QuizContext);
+  const { response } = useContext(UserContext);
+
+  if (response.collection) {
+    // const collections = quiz.map((collection) => collection.words);
+    // console.log(collections);
+    const quizArray = Object.entries(quiz);
+    const quizName = quizArray[0][1];
+    const quizWords = quizArray[1][1];
+
+    const words = quizWords.map((word) => {
+      console.log(word);
+    });
+    console.log();
+    return (
+      <>
+        <div className="center-wrap">
+          {quizWords.map((word) => {
+            return (
+              <>
+                <ListGroup horizontal id="slowka" className="slowka">
+                  <>
+                    <ListGroup.Item id="slowko " className="slowko">
+                      {word.OriginalContent}
+                    </ListGroup.Item>
+                    <ListGroup.Item id="slowko " className="slowko">
+                      {word.TranslatedContent}
+                    </ListGroup.Item>
+                  </>
+                </ListGroup>
+              </>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
 }
 
 export default Slowka;

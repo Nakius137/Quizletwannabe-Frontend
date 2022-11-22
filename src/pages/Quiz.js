@@ -6,10 +6,13 @@ import Card from "react-bootstrap/Card";
 import { useContext } from "react";
 import DarkContext from "../context/dark-context";
 import { Link } from "react-router-dom";
-  
+import QuizContext from "../context/quiz-context";
 
 function Main() {
   const { dark } = useContext(DarkContext);
+  const { quiz } = useContext(QuizContext);
+  const quizArray = Object.entries(quiz);
+  const quizName = quizArray[0][1];
 
   return (
     <>
@@ -18,7 +21,7 @@ function Main() {
       <div className="center-wszystko div">
         {
           <Card.Title className={dark ? "tytul-glowny" : "tytul-glowny-white"}>
-            Niemiecki - Kartkówka - Słówka - Dział 7
+            {quizName}
           </Card.Title>
         }
         <ButtonGroup aria-label="Basic example">
