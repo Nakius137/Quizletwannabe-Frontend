@@ -24,10 +24,14 @@ function AddQuiz() {
   function AddToArray() {
     let Original = OriginalContent.current.value;
     let Translated = TranslatedContent.current.value;
-    setWords([...words, { Original, Translated }]);
+    if (Original == "" || Translated == "") {
+      alert("puste pole");
+    } else {
+      setWords([...words, { Original, Translated }]);
 
-    OriginalContent.current.value = "";
-    TranslatedContent.current.value = "";
+      OriginalContent.current.value = "";
+      TranslatedContent.current.value = "";
+    }
   }
 
   function AddQuiz() {
@@ -68,9 +72,7 @@ function AddQuiz() {
         </ListGroup>
 
         <Button
-          className={
-            dark ? "btn btn-dark break" : "btn btn-primary break"
-          }
+          className={dark ? "btn btn-dark break" : "btn btn-primary break"}
           onClick={AddToArray}
         >
           Dodaj słówko
@@ -94,9 +96,7 @@ function AddQuiz() {
         </div>
 
         <Button
-          className={
-            dark ? "btn btn-dark break" : "btn btn-primary break"
-          }
+          className={dark ? "btn btn-dark break" : "btn btn-primary break"}
           onClick={AddQuiz}
         >
           Dodaj Quiz
