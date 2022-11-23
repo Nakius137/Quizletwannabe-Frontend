@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../components/Navbar";
-import slowka from "../slowka";
 import axios from "axios";
 import { UserContext } from "../context/user-context";
 import QuizContext from "../context/quiz-context";
@@ -39,6 +38,7 @@ function Main() {
   }, []);
 
   if (response) {
+    console.log(response.collection);
     return (
       <>
         <Nav></Nav>
@@ -59,7 +59,7 @@ function Main() {
                     {" "}
                     <p className={dark ? "p-dark" : "p"}>
                       {" "}
-                      {index[1].words.length} słówek{" "}
+                      {index[1].words.length} {index[1].words.length>5?"słówek":"słowa"}{" "}
                     </p>
                   </div>
 

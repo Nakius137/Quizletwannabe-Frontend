@@ -5,10 +5,11 @@ import Toogle from "./components/Toogle";
 import { Route, Switch } from "react-router-dom";
 import Quiz from "./pages/Quiz";
 import Main from "./pages/Main";
-import Login from "./pages/Login";
-import User from "./pages/User";
+import Login from "./pages/Loging/Login";
 import Pisz from "./pages/Pisz";
 import { UserContext } from "./context/user-context";
+import Register from "./pages/Loging/Register";
+import Passwdfrgt from "./pages/Loging/PasswordForgot"
 
 import QuizContext from "./context/quiz-context";
 
@@ -67,9 +68,14 @@ function App() {
             <Login />
           </Route>
 
-          <Route path="/user">
-            <User />
+          <Route path="/register">
+            <Register />
           </Route>
+
+          <Route path="/passwdfrgt">
+            <Passwdfrgt />
+          </Route>
+          
         </Switch>
         <Toogle />
       </DarkContext.Provider>

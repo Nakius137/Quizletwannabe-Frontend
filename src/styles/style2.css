@@ -61,6 +61,17 @@
     margin: 30px;
     color: black;
 }
+.tytul-podrzedny-white{
+    font-size: 20px;
+    margin: 30px;
+    color: black;
+}
+
+.tytul-podrzedny{
+    font-size: 20px;
+    margin: 30px;
+    color: white;
+}
 
 #check{
     width: 50px;
@@ -179,7 +190,7 @@
     justify-content: center;
     border: #eb6864 solid 3px;
     box-shadow: 3px 3px 30px -5px #eb6864;
-    transition: all 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
     cursor: pointer;
     align-content: center
 }
@@ -337,4 +348,10 @@ color: #000000;
     color: black;
     margin-top: 1%;
     margin-left: 2%;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

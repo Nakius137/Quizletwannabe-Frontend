@@ -1,5 +1,4 @@
 import Nav from "../components/Navbar";
-import slowka from "../slowka";
 import Carousel from "react-bootstrap/Carousel";
 import "react-bootstrap";
 import { useContext } from "react";
