@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
@@ -9,8 +9,7 @@ import QuizContext from "../context/quiz-context";
 import DarkContext from "../context/dark-context";
 
 function Main() {
-  const { logged, token, email, setResponse, response } =
-    useContext(UserContext);
+  const { token, email, setResponse, response } = useContext(UserContext);
   const { dark } = useContext(DarkContext);
   const { setQuiz } = useContext(QuizContext);
 
@@ -38,7 +37,6 @@ function Main() {
   }, []);
 
   if (response) {
-    //console.log(response.collection);
     return (
       <>
         <Nav></Nav>
@@ -46,7 +44,6 @@ function Main() {
 
         <div className="all-quiz">
           {Object.entries(response.collection).map((index) => {
-            //console.log(index);
             return (
               <div
                 className={dark ? "single-quiz-dark" : "single-quiz"}

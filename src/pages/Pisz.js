@@ -4,13 +4,11 @@ import "react-bootstrap";
 import { useContext, useRef } from "react";
 import DarkContext from "../context/dark-context";
 import { Alert, Button, ButtonGroup, Form, InputGroup } from "react-bootstrap";
-import { useEffect } from "react";
 import QuizContext from "../context/quiz-context";
 
 function Fiszki() {
   const { dark } = useContext(DarkContext);
-
-  const { quiz, setQuiz } = useContext(QuizContext);
+  const { quiz } = useContext(QuizContext);
 
   function hideAlert() {
     succes.current.className =
@@ -36,10 +34,8 @@ function Fiszki() {
     ref.current.next();
   };
 
-  function handleClick(refs, index) {
+  const handleClick = (refs, index) => {
     const value = refs.current[index].value;
-
-    //console.log(quiz.words[index].TranslatedContent);
 
     if (value === quiz.words[index].TranslatedContent) {
       console.log("dobrze");
@@ -56,7 +52,8 @@ function Fiszki() {
       succes.current.className =
         "fade succes-alert-fiszka-hidden alert alert-success show";
     }
-  }
+  };
+
   return (
     <>
       <Nav></Nav>

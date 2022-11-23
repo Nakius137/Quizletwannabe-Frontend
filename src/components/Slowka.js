@@ -8,16 +8,9 @@ function Slowka() {
   const { response } = useContext(UserContext);
 
   if (response.collection) {
-    // const collections = quiz.map((collection) => collection.words);
-    // console.log(collections);
     const quizArray = Object.entries(quiz);
-
     const quizWords = quizArray[1][1];
 
-    const words = quizWords.map((word) => {
-      console.log(word);
-    });
-    
     return (
       <>
         <div className="center-wrap">

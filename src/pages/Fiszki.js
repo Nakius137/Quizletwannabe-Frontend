@@ -5,7 +5,7 @@ import { useContext } from "react";
 import DarkContext from "../context/dark-context";
 import QuizContext from "../context/quiz-context";
 
-function handleWordChange(slowko,index) {
+function handleWordChange(slowko, index) {
   console.log(slowko);
   if (document.getElementById(index).innerHTML === slowko.OriginalContent) {
     document.getElementById(index).innerHTML = slowko.TranslatedContent;
@@ -16,20 +16,17 @@ function handleWordChange(slowko,index) {
 
 function Fiszki() {
   const { dark } = useContext(DarkContext);
-
-  const { quiz, setQuiz } = useContext(QuizContext);
-  //console.log(quiz.words);
-
+  const { quiz } = useContext(QuizContext);
   return (
     <>
       <Nav></Nav>
       <div className="center-fiszke">
         <Carousel interval={null}>
-          {quiz.words.map((slowko,index) => {
+          {quiz.words.map((slowko, index) => {
             return (
               <Carousel.Item
                 key={slowko.OriginalContent}
-                onClick={() => handleWordChange(slowko,index)}
+                onClick={() => handleWordChange(slowko, index)}
               >
                 <div className={dark ? "tlo-fiszka-dark" : "tlo-fiszka"}></div>
                 <Carousel.Caption>
@@ -47,4 +44,3 @@ function Fiszki() {
 }
 
 export default Fiszki;
-

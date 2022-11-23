@@ -8,13 +8,13 @@ import Nav from "../../components/Navbar";
 import axios from "axios";
 import { UserContext } from "../../context/user-context";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Loign() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { dark } = useContext(DarkContext);
-  const { setToken, setLogged, setEmail, email } = useContext(UserContext);
+  const { setToken, setLogged, setEmail } = useContext(UserContext);
 
   const login_email = useRef();
   const login_password = useRef();
@@ -25,11 +25,11 @@ function Loign() {
     };
     login_email.current.value = "";
     login_password.current.value = "";
-    const acesstoken = await axios
+    await axios
       .post("http://www.localhost:5000/login", data)
       .then((response) => setToken(response[`data`][`accessToken`]))
       .then((email) => setEmail(data.email))
-      .then((logged) => setLogged(true), history.push("/"));
+      .then((logged) => setLogged(true), navigate("/"));
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from "react";
 
 export const UserContext = React.createContext(null);

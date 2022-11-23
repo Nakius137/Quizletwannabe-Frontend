@@ -6,12 +6,10 @@ import { useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../../components/Navbar";
 import axios from "axios";
-import { UserContext } from "../../context/user-context";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Rergiter() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { dark } = useContext(DarkContext);
 
@@ -23,13 +21,11 @@ function Rergiter() {
       email: register_email.current.value,
       password: register_password.current.value,
     };
-    //console.log(data);
-
     axios
       .post("http://www.localhost:5000/register", data)
       .then((respose) => console.log(respose))
-      .then(alert('Pomyślnie sie zarejestrowano'))
-      .then(history.push("/login"));
+      .then(alert("Pomyślnie sie zarejestrowano"))
+      .then(navigate("/login"));
   };
 
   return (

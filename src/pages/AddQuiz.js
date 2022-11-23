@@ -1,17 +1,13 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import QuizContext from "../context/quiz-context";
 import { useContext, useRef, useState } from "react";
-import { UserContext } from "../context/user-context";
 import Nav from "../components/Navbar";
 import { Button, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DarkContext from "../context/dark-context";
 
 function AddQuiz() {
   const { dark } = useContext(DarkContext);
-  const { quiz } = useContext(QuizContext);
-  const { response } = useContext(UserContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [words, setWords] = useState([]);
 
@@ -35,7 +31,7 @@ function AddQuiz() {
     newQuiz.push(words);
     console.log(newQuiz);
     alert("Quiz został dodany do twojego konta");
-    history.push("/");
+    navigate("/");
   }
 
   return (
@@ -68,9 +64,7 @@ function AddQuiz() {
         </ListGroup>
 
         <Button
-          className={
-            dark ? "btn btn-dark break" : "btn btn-primary break"
-          }
+          className={dark ? "btn btn-dark break" : "btn btn-primary break"}
           onClick={AddToArray}
         >
           Dodaj słówko
@@ -94,9 +88,7 @@ function AddQuiz() {
         </div>
 
         <Button
-          className={
-            dark ? "btn btn-dark break" : "btn btn-primary break"
-          }
+          className={dark ? "btn btn-dark break" : "btn btn-primary break"}
           onClick={AddQuiz}
         >
           Dodaj Quiz

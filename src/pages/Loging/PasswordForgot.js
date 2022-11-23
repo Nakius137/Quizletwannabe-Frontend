@@ -5,20 +5,13 @@ import DarkContext from "../../context/dark-context";
 import { useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../../components/Navbar";
-import axios from "axios";
-import { UserContext } from "../../context/user-context";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 function PasswordForgot() {
-  const history = useHistory();
-
   const { dark } = useContext(DarkContext);
 
   const email = useRef();
 
   const SendDataForgot = () => {
-    //sending email
     console.log("send");
   };
 

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Fiszki from "./pages/Fiszki";
 import DarkContext from "./context/dark-context";
 import Toogle from "./components/Toogle";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Quiz from "./pages/Quiz";
 import Main from "./pages/Main";
 import Login from "./pages/Loging/Login";
@@ -10,7 +10,7 @@ import Pisz from "./pages/Pisz";
 import { UserContext } from "./context/user-context";
 import Register from "./pages/Loging/Register";
 import Passwdfrgt from "./pages/Loging/PasswordForgot";
-import AddQuiz from "./pages/AddQuiz"
+import AddQuiz from "./pages/AddQuiz";
 
 import QuizContext from "./context/quiz-context";
 
@@ -27,67 +27,37 @@ function App() {
   return (
     <QuizContext.Provider value={{ quiz, setQuiz }}>
       <DarkContext.Provider value={{ dark, setDark }}>
-        <Switch>
-          {logged ? (
-            <Route exact path="/">
-              <Main />
-            </Route>
-          ) : (
-            <Route exact path="/">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/fiszka">
-              <Fiszki />
-            </Route>
-          ) : (
-            <Route path="/fiszka">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/quiz">
-              <Quiz />
-            </Route>
-          ) : (
-            <Route path="/quiz">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/pisz">
-              <Pisz />
-            </Route>
-          ) : (
-            <Route path="/pisz">
-              <Login />
-            </Route>
-          )}
+        <Routes>
+          <Route path="/" element={logged ? <Main /> : <Login />}></Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+          <Route
+            path="/fiszka"
+            element={logged ? <Fiszki /> : <Login />}
+          ></Route>
 
-          <Route path="/register">
-            <Register />
-          </Route>
+          <Route path="/quiz" element={logged ? <Quiz /> : <Login />}></Route>
 
-          <Route path="/passwdfrgt">
-            <Passwdfrgt />
-          </Route>
+          <Route path="/pisz" element={logged ? <Pisz /> : <Login />}></Route>
 
-          {logged ? (
-            <Route path="/addquiz">
-              <AddQuiz />
-            </Route>
-          ) : (
-            <Route path="/addquiz">
-              <Login />
-            </Route>
-          )}
+          <Route path="/login" element={logged ? <Main /> : <Login />}></Route>
 
-        </Switch>
+          <Route
+            path="/register"
+            element={logged ? <Main /> : <Register />}
+          ></Route>
+
+          <Route
+            path="/passwdfrgt"
+            element={logged ? <Main /> : <Passwdfrgt />}
+          ></Route>
+
+          <Route
+            path="/addquiz"
+            element={logged ? <AddQuiz /> : <Login />}
+          ></Route>
+
+          <Route path="*" element={logged ? <Main /> : <Login />}></Route>
+        </Routes>
         <Toogle />
       </DarkContext.Provider>
     </QuizContext.Provider>
