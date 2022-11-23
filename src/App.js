@@ -9,7 +9,8 @@ import Login from "./pages/Loging/Login";
 import Pisz from "./pages/Pisz";
 import { UserContext } from "./context/user-context";
 import Register from "./pages/Loging/Register";
-import Passwdfrgt from "./pages/Loging/PasswordForgot"
+import Passwdfrgt from "./pages/Loging/PasswordForgot";
+import AddQuiz from "./pages/AddQuiz"
 
 import QuizContext from "./context/quiz-context";
 
@@ -75,7 +76,17 @@ function App() {
           <Route path="/passwdfrgt">
             <Passwdfrgt />
           </Route>
-          
+
+          {logged ? (
+            <Route path="/addquiz">
+              <AddQuiz />
+            </Route>
+          ) : (
+            <Route path="/addquiz">
+              <Login />
+            </Route>
+          )}
+
         </Switch>
         <Toogle />
       </DarkContext.Provider>

@@ -38,48 +38,50 @@ function Main() {
   }, []);
 
   if (response) {
-    console.log(response.collection);
+    //console.log(response.collection);
     return (
       <>
         <Nav></Nav>
         <h1 className={dark ? "white-h1" : "black-h1"}>Twoje Quizy:</h1>
-        {logged ? (
-          <div className="all-quiz">
-            {Object.entries(response.collection).map((index) => {
-              console.log(index);
-              return (
-                <div
-                  className={dark ? "single-quiz-dark" : "single-quiz"}
-                  key={index}
-                >
-                  <h1 className={dark ? "tytul-quiz-dark" : "tytul-quiz"}>
-                    {index[1].name}
-                  </h1>
-                  <div className="ilosc-slowek">
-                    {" "}
-                    <p className={dark ? "p-dark" : "p"}>
-                      {" "}
-                      {index[1].words.length} {index[1].words.length>5?"słówek":"słowa"}{" "}
-                    </p>
-                  </div>
 
-                  <Link className="link" to="/quiz">
-                    <Button
-                      className={
-                        dark ? "button-center btn btn-dark" : "button-center"
-                      }
-                      onClick={() => handleQuizChange(response, index[1].name)}
-                    >
-                      Przejdź do quizu
-                    </Button>
-                  </Link>
+        <div className="all-quiz">
+          {Object.entries(response.collection).map((index) => {
+            //console.log(index);
+            return (
+              <div
+                className={dark ? "single-quiz-dark" : "single-quiz"}
+                key={index}
+              >
+                <h1 className={dark ? "tytul-quiz-dark" : "tytul-quiz"}>
+                  {index[1].name}
+                </h1>
+                <div className="ilosc-slowek">
+                  {" "}
+                  <p className={dark ? "p-dark" : "p"}>
+                    {" "}
+                    {index[1].words.length}{" "}
+                    {index[1].words.length > 5 ? "słówek" : "słowa"}{" "}
+                  </p>
+                  <Button className="delete-btn"></Button>
                 </div>
-              );
-            })}
-          </div>
-        ) : (
-          <h1>nie jesteś Zalogowany</h1>
-        )}
+
+                <Link className="link" to="/quiz">
+                  <Button
+                    className={
+                      dark ? "button-center btn btn-dark" : "button-center"
+                    }
+                    onClick={() => handleQuizChange(response, index[1].name)}
+                  >
+                    Przejdź do quizu
+                  </Button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <Link to="/addquiz">
+          <Button className="add-quiz">+</Button>
+        </Link>
       </>
     );
   }
