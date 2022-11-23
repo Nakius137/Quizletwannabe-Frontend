@@ -20,10 +20,14 @@ function AddQuiz() {
   function AddToArray() {
     let Original = OriginalContent.current.value;
     let Translated = TranslatedContent.current.value;
-    setWords([...words, { Original, Translated }]);
+    if (Original == "" || Translated == "") {
+      alert("puste pole");
+    } else {
+      setWords([...words, { Original, Translated }]);
 
-    OriginalContent.current.value = "";
-    TranslatedContent.current.value = "";
+      OriginalContent.current.value = "";
+      TranslatedContent.current.value = "";
+    }
   }
 
   function AddQuiz() {
