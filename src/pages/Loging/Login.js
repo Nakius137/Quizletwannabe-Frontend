@@ -15,27 +15,51 @@ function Loign() {
   const history = useHistory();
 
   const { dark } = useContext(DarkContext);
-  const { setToken, setLogged, setEmail, email } = useContext(UserContext);
+  const { setToken, setLogged, setEmail } = useContext(UserContext);
+
+  const fail = useRef();
+  const center = useRef();
 
   const login_email = useRef();
   const login_password = useRef();
+
   const SendDataLogin = async () => {
-    const data = {
-      email: login_email.current.value,
-      password: login_password.current.value,
-    };
-    login_email.current.value = "";
-    login_password.current.value = "";
-    const acesstoken = await axios
-      .post("http://www.localhost:5000/login", data)
-      .then((response) => setToken(response[`data`][`accessToken`]))
-      .then((email) => setEmail(data.email))
-      .then((logged) => setLogged(true), history.push("/"));
+    if (
+      login_email.current.value !== "" ||
+      login_password.current.value !== ""
+    ) {
+      const data = {
+        email: login_email.current.value,
+        password: login_password.current.value,
+      };
+
+      login_email.current.value = "";
+      login_password.current.value = "";
+      const acesstoken = await axios
+        .post("http://www.localhost:5000/login", data)
+        .then((response) => setToken(response[`data`][`accessToken`]))
+        .then((email) => setEmail(data.email))
+        .then((logged) => setLogged(true), history.push("/"));
+    } else {
+      center.current.className = "center-alert";
+      fail.current.className =
+        "fade danger-alert-fiszka alert alert-danger show";
+    }
   };
 
   return (
     <>
       <Nav></Nav>
+      <div className="center-alert-hidden" ref={center}>
+        <Alert
+          ref={fail}
+          className="danger-alert-fiszka-hidden"
+          key="danger"
+          variant="danger"
+        >
+          Prosze wypełnić wszystkie pola
+        </Alert>
+      </div>
       <div className="logowanie width500px">
         <h2
           className={

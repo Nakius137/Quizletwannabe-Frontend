@@ -10,7 +10,7 @@ import Pisz from "./pages/Pisz";
 import { UserContext } from "./context/user-context";
 import Register from "./pages/Loging/Register";
 import Passwdfrgt from "./pages/Loging/PasswordForgot";
-import AddQuiz from "./pages/AddQuiz"
+import AddQuiz from "./pages/AddQuiz";
 
 import QuizContext from "./context/quiz-context";
 
@@ -28,42 +28,17 @@ function App() {
     <QuizContext.Provider value={{ quiz, setQuiz }}>
       <DarkContext.Provider value={{ dark, setDark }}>
         <Switch>
-          {logged ? (
-            <Route exact path="/">
-              <Main />
-            </Route>
-          ) : (
-            <Route exact path="/">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/fiszka">
-              <Fiszki />
-            </Route>
-          ) : (
-            <Route path="/fiszka">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/quiz">
-              <Quiz />
-            </Route>
-          ) : (
-            <Route path="/quiz">
-              <Login />
-            </Route>
-          )}
-          {logged ? (
-            <Route path="/pisz">
-              <Pisz />
-            </Route>
-          ) : (
-            <Route path="/pisz">
-              <Login />
-            </Route>
-          )}
+          <Route exact path="/">
+            {logged ? <Main /> : <Login />}
+          </Route>
+
+          <Route path="/fiszka">{logged ? <Fiszki /> : <Login />}</Route>
+
+          <Route path="/quiz">{logged ? <Quiz /> : <Login />}</Route>
+
+          <Route path="/pisz">{logged ? <Pisz /> : <Login />}</Route>
+
+          <Route path="/addquiz">{logged ? <AddQuiz /> : <Login />}</Route>
 
           <Route path="/login">
             <Login />
@@ -76,17 +51,7 @@ function App() {
           <Route path="/passwdfrgt">
             <Passwdfrgt />
           </Route>
-
-          {logged ? (
-            <Route path="/addquiz">
-              <AddQuiz />
-            </Route>
-          ) : (
-            <Route path="/addquiz">
-              <Login />
-            </Route>
-          )}
-
+          
         </Switch>
         <Toogle />
       </DarkContext.Provider>

@@ -100,7 +100,9 @@ function Main() {
           })}
         </div>
         <Link to="/addquiz">
-          <Button className="add-quiz">+</Button>
+          <Button className={dark ? " btn btn-dark add-quiz" : " add-quiz"}>
+            +
+          </Button>
         </Link>
       </>
     );

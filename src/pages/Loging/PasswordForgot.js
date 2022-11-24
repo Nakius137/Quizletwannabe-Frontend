@@ -9,6 +9,7 @@ import axios from "axios";
 import { UserContext } from "../../context/user-context";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 function PasswordForgot() {
   const history = useHistory();
@@ -17,14 +18,50 @@ function PasswordForgot() {
 
   const email = useRef();
 
+  const fail = useRef();
+  const succes = useRef();
+  const center = useRef();
+
   const SendDataForgot = () => {
-    //sending email
-    console.log("send");
+    if (email.current.value !== "") {
+
+      //tutaj backend
+
+      center.current.className = "center-alert";
+      succes.current.className =
+        "fade succes-alert-fiszka alert alert-success show";
+      fail.current.className =
+        "fade danger-alert-fiszka-hidden alert alert-danger show";
+    } else {
+      center.current.className = "center-alert";
+      fail.current.className =
+        "fade danger-alert-fiszka alert alert-danger show";
+      succes.current.className =
+        "fade succes-alert-fiszka-hidden alert alert-success show";
+    }
   };
 
   return (
     <>
       <Nav></Nav>
+      <div className="center-alert-hidden" ref={center}>
+        <Alert
+          ref={succes}
+          className="succes-alert-fiszka-hidden"
+          key="success"
+          variant="success"
+        >
+          Wiadomość wysłana na maila!
+        </Alert>
+        <Alert
+          ref={fail}
+          className="danger-alert-fiszka-hidden"
+          key="danger"
+          variant="danger"
+        >
+          Proszę podać maila
+        </Alert>
+      </div>
       <div className="logowanie width500px">
         <h2
           className={
