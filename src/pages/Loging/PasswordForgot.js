@@ -6,10 +6,8 @@ import { useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "../../components/Navbar";
 import axios from "axios";
-import { UserContext } from "../../context/user-context";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 function PasswordForgot() {
   const history = useHistory();
@@ -22,16 +20,15 @@ function PasswordForgot() {
   const succes = useRef();
   const center = useRef();
 
-  const SendDataForgot = () => {
+  const SendDataForgot = async () => {
     if (email.current.value !== "") {
-
-      //tutaj backend
-
+      await axios.post("http://www.localhost:5000/passwdfrgt");
       center.current.className = "center-alert";
       succes.current.className =
         "fade succes-alert-fiszka alert alert-success show";
       fail.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
+      history.push("/login");
     } else {
       center.current.className = "center-alert";
       fail.current.className =

@@ -7,8 +7,7 @@ import Button from "react-bootstrap/Button";
 import Nav from "../../components/Navbar";
 import axios from "axios";
 import { UserContext } from "../../context/user-context";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 function Loign() {

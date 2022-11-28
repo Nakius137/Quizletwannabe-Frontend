@@ -1,16 +1,16 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import { useContext, useRef, useState } from "react";
-//import { UserContext } from "../context/user-context";
-//import QuizContext from "../context/quiz-context";
 import Nav from "../components/Navbar";
 import { Alert, Button, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import DarkContext from "../context/dark-context";
+import axios from "axios";
+import { UserContext } from "../context/user-context";
+import { useHistory } from "react-router-dom";
 
-function AddQuiz() {
+const AddQuiz = () => {
   const { dark } = useContext(DarkContext);
-  // const { quiz } = useContext(QuizContext);
-  // const { response } = useContext(UserContext);
+  const { token, email } = useContext(UserContext);
+
   const history = useHistory();
 
   const [words, setWords] = useState([]);
@@ -21,13 +21,13 @@ function AddQuiz() {
   const fail_quiz = useRef();
   const succes_quiz = useRef();
 
-  const newQuiz = [];
+  const newQuiz = { name: "", words: [], email: "" };
 
   const OriginalContent = useRef();
   const TranslatedContent = useRef();
   const title = useRef();
 
-  function AddToArray() {
+  const handleAddToArray = () => {
     let Original = OriginalContent.current.value;
     let Translated = TranslatedContent.current.value;
     if (Original === "" || Translated === "") {
@@ -46,7 +46,7 @@ function AddQuiz() {
         "fade danger-alert-fiszka-hidden alert alert-danger show";
       fail_quiz.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
-      setTimeout(function () {
+      setTimeout(() => {
         succes.current.className =
           "fade succes-alert-fiszka-hidden alert alert-success show";
         center.current.className = "center-alert-hidden";
@@ -56,13 +56,13 @@ function AddQuiz() {
       OriginalContent.current.value = "";
       TranslatedContent.current.value = "";
     }
-  }
+  };
 
-  function AddQuiz() {
+  const handleAddQuiz = async () => {
     if (title.current.value !== "" && words.length !== 0) {
-      newQuiz.push(title.current.value);
-      newQuiz.push(words);
-      //console.log(newQuiz);
+      newQuiz.name = title.current.value;
+      newQuiz.email = email;
+      newQuiz.words = words;
 
       center.current.className = "center-alert";
       fail.current.className =
@@ -71,9 +71,14 @@ function AddQuiz() {
         "fade succes-alert-fiszka  alert alert-success show";
       fail_quiz.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
-      setTimeout(function () {
-        history.push("/");
-      }, 2000);
+
+      await axios.post("http://www.localhost:5000/addquiz", newQuiz, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      history.push("/");
     } else {
       center.current.className = "center-alert";
       fail_quiz.current.className =
@@ -81,7 +86,7 @@ function AddQuiz() {
       fail.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
     }
-  }
+  };
 
   return (
     <>
@@ -147,7 +152,7 @@ function AddQuiz() {
 
         <Button
           className={dark ? "btn btn-dark break" : "btn btn-primary break"}
-          onClick={AddToArray}
+          onClick={handleAddToArray}
         >
           Dodaj słówko
         </Button>
@@ -171,13 +176,13 @@ function AddQuiz() {
 
         <Button
           className={dark ? "btn btn-dark break" : "btn btn-primary break"}
-          onClick={AddQuiz}
+          onClick={handleAddQuiz}
         >
           Dodaj Quiz
         </Button>
       </div>
     </>
   );
-}
+};
 
 export default AddQuiz;

@@ -51,7 +51,9 @@ function App() {
           <Route path="/passwdfrgt">
             <Passwdfrgt />
           </Route>
-          
+          <Route path="/*">
+            <Login />
+          </Route>
         </Switch>
         <Toogle />
       </DarkContext.Provider>
