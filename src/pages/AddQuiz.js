@@ -71,6 +71,7 @@ const AddQuiz = () => {
         "fade succes-alert-fiszka  alert alert-success show";
       fail_quiz.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
+      history.push("/");
 
       await axios.post("http://www.localhost:5000/addquiz", newQuiz, {
         headers: {
@@ -78,7 +79,6 @@ const AddQuiz = () => {
           Authorization: "Bearer " + token,
         },
       });
-      history.push("/");
     } else {
       center.current.className = "center-alert";
       fail_quiz.current.className =
