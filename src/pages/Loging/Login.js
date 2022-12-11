@@ -38,7 +38,8 @@ function Loign() {
         .post("http://www.localhost:5000/login", data)
         .then((response) => setToken(response[`data`][`accessToken`]))
         .then((email) => setEmail(data.email))
-        .then((logged) => setLogged(true), history.push("/"));
+        .then((logged) => setLogged(true), history.push("/"))
+        .catch((err) => console.log(err));
     } else {
       center.current.className = "center-alert";
       fail.current.className =
