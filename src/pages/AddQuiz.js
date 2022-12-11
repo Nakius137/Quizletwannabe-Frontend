@@ -71,7 +71,10 @@ const AddQuiz = () => {
         "fade succes-alert-fiszka  alert alert-success show";
       fail_quiz.current.className =
         "fade danger-alert-fiszka-hidden alert alert-danger show";
-      history.push("/");
+
+      setTimeout(() => {
+        history.push("/");
+      }, 3000);
 
       await axios.post("http://www.localhost:5000/addquiz", newQuiz, {
         headers: {
